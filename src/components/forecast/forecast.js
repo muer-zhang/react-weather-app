@@ -6,7 +6,25 @@ import {
   AccordionItemButton,
 } from 'react-accessible-accordion'
 
+const WEEK_DAYS = [
+  'Monday',
+  'Tuesday',
+  'Wednesday',
+  'Thursday',
+  'Friday',
+  'Saturday',
+  'Sunday',
+]
+
 const Forecast = ({ data }) => {
+  const dayInAWeek = new Date().getDay()
+  console.log('dayInAWeek:', dayInAWeek)
+
+  const forecastDays = WEEK_DAYS.slice(dayInAWeek).concat(
+    WEEK_DAYS.slice(0, dayInAWeek)
+  )
+  console.log('forecastDays:', forecastDays)
+
   return (
     <>
       <label className="title">Daily</label>
@@ -21,6 +39,7 @@ const Forecast = ({ data }) => {
                     className="icon-small"
                     src={`icons/${item.weather[0].icon}.png`}
                   />
+                  <label className="day">{forecastDays[idx]}</label>
                 </div>
               </AccordionItemButton>
             </AccordionItemHeading>
